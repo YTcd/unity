@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     private float surviveTime;
     private bool isGameover;
 
-
     void Start()
     {
         surviveTime = 0f;
@@ -26,12 +25,30 @@ public class GameManager : MonoBehaviour
         if(!isGameover)
         {
             surviveTime += Time.deltaTime;
-            timeText.text = "Time : " + (int)surviveTime; 
+            timeText.text = "Time : " + (int)surviveTime;
+        }
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
         }
     }
 
     public void EndGame()
     {
+        isGameover = true;
+        gameoverText.SetActive(true);
 
+        float bestTime = PlayerPrefs.GetFloat("BestTime");
+
+        if(surviveTime > bestTime)
+        {
+            bestTime = surviveTime;
+            PlayerPrefs.SetFloat("BestTime", bestTime);
+        }
+
+        recordText.text = "Best Time: " + (int)bestTime;
     }
 }
