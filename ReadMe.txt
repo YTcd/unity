@@ -1,0 +1,1 @@
+github의 contributions 적용 하는 용도
