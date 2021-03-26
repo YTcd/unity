@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
             playerRigidbody.AddForce(new Vector2(0, jumpForce));
             playerAudio.Play();
         }
-        else if(Input.GetMouseButtonDown(0) && playerRigidbody.velocity.y > 0)
+        else if(Input.GetMouseButtonUp(0) && playerRigidbody.velocity.y > 0)
         {
             playerRigidbody.velocity = playerRigidbody.velocity * 0.5f;
         }
@@ -42,18 +42,40 @@ public class PlayerController : MonoBehaviour {
    }
 
    private void Die() {
+        animator.SetTrigger("Die");
+
+        playerAudio.clip = deathClip;
+        playerAudio.Play();
+
+        playerRigidbody.velocity = Vector2.zero;
+
+        isDead = true;
+
        // 사망 처리
-   }
+    }
 
    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.tag == "Dead" && !isDead)
+        {
+            Die();
+        }
+
        // 트리거 콜라이더를 가진 장애물과의 충돌을 감지
    }
 
    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.contacts[0].normal.y > 0.7f)
+        {
+            isGrounded = true;
+            jumpCount = 0;
+        }
        // 바닥에 닿았음을 감지하는 처리
    }
 
    private void OnCollisionExit2D(Collision2D collision) {
+
+        isGrounded = false;
+
        // 바닥에서 벗어났음을 감지하는 처리
    }
 }
