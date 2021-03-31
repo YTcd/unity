@@ -51,7 +51,10 @@ public class PlayerController : MonoBehaviour {
 
         isDead = true;
 
-       // 사망 처리
+        // 사망 처리
+
+        GameManager.instance.OnPlayerDead();
+
     }
 
    private void OnTriggerEnter2D(Collider2D other) {
