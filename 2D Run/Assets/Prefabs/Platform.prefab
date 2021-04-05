@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 212850827289184248}
   - component: {fileID: 61778116517464604}
   - component: {fileID: 114169964638007176}
+  - component: {fileID: 118540878}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -336,6 +337,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+--- !u!114 &118540878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671242928466520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 9f975ef653abb48238f62061ebab1c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacles:
+  - {fileID: 1297539188427694}
+  - {fileID: 1832961231703714}
+  - {fileID: 1166831543635676}
 --- !u!1 &1832961231703714
 GameObject:
   m_ObjectHideFlags: 0
