@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
     private Animator playerAnimator; // 플레이어 캐릭터의 애니메이터
 
     private void Start() {
-        playerInput = GetComponent<playerInput>();
+        playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         // 사용할 컴포넌트들의 참조를 가져오기
