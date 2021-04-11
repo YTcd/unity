@@ -61,7 +61,7 @@ public class Gun : MonoBehaviour {
         //발사 가능한상태 && 마지막 발사로부터 timeBetFire 이상으로 지남
         if (state == State.Ready && Time.time >= lastFireTime + timeBetFire)
         {
-            lastFireTime = TIme.time;
+            lastFireTime = Time.time;
             Shot();
         }
     }
@@ -79,7 +79,7 @@ public class Gun : MonoBehaviour {
             //레이가 어떤 물체와 충돌한 경우
 
             //충돌한 상대로부터 IDamageble 오브젝트 가져옴
-            IDamageble target = hit.collider.GetComponent<IDamageble>();
+            IDamageable target = hit.collider.GetComponent<IDamageable>();
 
             //가져왔다면
             if(target != null)
@@ -94,7 +94,7 @@ public class Gun : MonoBehaviour {
             hitPosition = fireTransform.position + fireTransform.forward * fireDistance;
         }
 
-        StartCorutine(ShotEffect(hitPosition));
+        StartCoroutine(ShotEffect(hitPosition));
         //남은탄창수 -1
         magAmmo--;
         if(magAmmo <= 0)
@@ -136,16 +136,35 @@ public class Gun : MonoBehaviour {
 
     // 재장전 시도
     public bool Reload() {
-        return false;
+        if(state == State.Reloading || ammoRemain <= 0 || magAmmo >= magCapacity)
+        {
+            return false;
+        }
+        StartCoroutine(ReloadRoutine());
+
+        return true;
     }
 
     // 실제 재장전 처리를 진행
     private IEnumerator ReloadRoutine() {
         // 현재 상태를 재장전 중 상태로 전환
         state = State.Reloading;
-        
+        gunAudioPlayer.PlayOneShot(reloadClip);
         // 재장전 소요 시간 만큼 처리를 쉬기
         yield return new WaitForSeconds(reloadTime);
+
+        int ammoToFill = magCapacity - magAmmo;
+
+        if(ammoRemain < ammoToFill)
+        {
+            ammoToFill = ammoRemain;
+        }
+
+        magAmmo += ammoToFill;
+        ammoRemain -= ammoToFill;
+
+        state = State.Ready;
+
 
         // 총의 현재 상태를 발사 준비된 상태로 변경
         state = State.Ready;
