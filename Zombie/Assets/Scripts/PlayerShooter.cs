@@ -29,6 +29,21 @@ public class PlayerShooter : MonoBehaviour {
 
     private void Update() {
         // 입력을 감지하고 총 발사하거나 재장전
+
+        if (playerInput.fire)
+        {
+            gun.Fire();
+        }
+        else if (playerInput.reload)
+        {
+            if (gun.Reload())
+            {
+                //재장전 성공시에만 재장전 애니메이션 재생
+                playerAnimator.SetTrigger("Reload");
+            }
+        }
+
+        UpdateUI();
     }
 
     // 탄약 UI 갱신
