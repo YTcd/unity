@@ -17,11 +17,20 @@ public class PlayerHealth : LivingEntity {
 
     private void Awake() {
         // 사용할 컴포넌트를 가져오기
+        playerAnimator = GetComponent<Animator>();
+        playerAudioPlayer = GetComponent<AudioSource>();
+
+        playerMovement = GetComponent<PlayerMovement>();
+        playerShooter = GetComponent<PlayerShooter>();
     }
 
     protected override void OnEnable() {
         // LivingEntity의 OnEnable() 실행 (상태 초기화)
         base.OnEnable();
+
+        healthSlider.gameObject.SetActive(true);
+        healthSlider.maxValue = startingHealth;
+        healthSlider.value = health;
     }
 
     // 체력 회복
