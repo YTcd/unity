@@ -106,6 +106,14 @@ public class Enemy : LivingEntity {
     // 데미지를 입었을때 실행할 처리
     public override void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal) {
         // LivingEntity의 OnDamage()를 실행하여 데미지 적용
+        if (!dead)
+        {
+            hitEffect.transform.position = hitPoint;
+            hitEffect.transform.rotation = Quaternion.LookRotation(hitNormal);
+            hitEffect.Play();
+
+            enemyAudioPlayer.PlayOneShot(hitSound);
+        }
         base.OnDamage(damage, hitPoint, hitNormal);
     }
 
@@ -113,9 +121,34 @@ public class Enemy : LivingEntity {
     public override void Die() {
         // LivingEntity의 Die()를 실행하여 기본 사망 처리 실행
         base.Die();
+
+
+        Collider[] enemyColliders = GetComponents<Collider>();
+        for (int i = 0; i < enemyColliders.Length; i++)
+        {
+            enemyColliders[i].enabled = false;
+        }
+        pathFinder.isStopped = true;
+        pathFinder.enabled = false;
+
+        enemyAnimator.SetTrigger("Die");
+        enemyAudioPlayer.PlayOneShot(deathSound);
     }
 
     private void OnTriggerStay(Collider other) {
         // 트리거 충돌한 상대방 게임 오브젝트가 추적 대상이라면 공격 실행   
+
+        if(!dead && Time.time >= lastAttackTime + timeBetAttack)
+        {
+            LivingEntity attackTarget = other.GetComponent<LivingEntity>();
+            if(attackTarget != null && attackTarget == targetEntity)
+            {
+                lastAttackTime = Time.time;
+                Vector3 hitPoint = other.ClosestPoint(transform.position);
+                Vector3 hitNormal = transform.position - other.transform.position;
+
+                attackTarget.OnDamage(damage, hitPoint, hitNormal);
+            }
+        }
     }
 }
