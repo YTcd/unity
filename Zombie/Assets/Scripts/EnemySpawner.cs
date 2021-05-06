@@ -63,10 +63,10 @@ public class EnemySpawner : MonoBehaviour {
         float damage = Mathf.Lerp(damageMin, damageMax, intensity);
         float speed = Mathf.Lerp(speedMin, speedMax, intensity);
 
-        Color skinColor = Color.Lerp(Color.White, strongEnemyColor, intensity);
+        Color skinColor = Color.Lerp(Color.white, strongEnemyColor, intensity);
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        Enemy enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.ratation);
+        Enemy enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
 
         enemy.Setup(health, damage, speed, skinColor);
 
