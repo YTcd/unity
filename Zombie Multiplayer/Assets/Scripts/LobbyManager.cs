@@ -40,7 +40,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks {
 
         if (PhotonNetwork.IsConnected)
         {
-            connectionInfoText = "룸에 접속...";
+            connectionInfoText.text = "룸에 접속...";
             PhotonNetwork.JoinRandomRoom();
         }
         else
