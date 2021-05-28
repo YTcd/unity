@@ -10,6 +10,7 @@ public class CharacterMove : MonoBehaviour
     float mh;   //캠 회전축
     float mv;
     public float speed = 500f;
+    public float gravity = -250f;
     private int jumpCount = 0;
     public float rotateSpeed = 200f;
     public float jumpForce = 500f;
@@ -50,12 +51,13 @@ public class CharacterMove : MonoBehaviour
 
         Vector3 newVelocity;
         newVelocity = transform.right * xSpeed + transform.forward * zSpeed;
-        
+
         //transform.forward는 월드 좌표 기준 오브젝트의 회전 값을 반영한 normalized된 값을 반환합니다.
         //현재의 forward와 입력받은 값(방향)을 곱하여, 캐릭터를 기준(로컬 좌표)으로 캐릭터를 이동합니다.
 
-
+        //playerRigidbody.AddForce(Vector3.up * gravity);
         playerRigidbody.velocity = newVelocity * Time.deltaTime;
+        
     }
 
     void CamRotate()
