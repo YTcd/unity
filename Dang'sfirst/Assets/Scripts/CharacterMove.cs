@@ -9,8 +9,7 @@ public class CharacterMove : MonoBehaviour
     public Transform cameraRotate;
     float mh;   //캠 회전축
     float mv;
-    public float speed = 500f;
-    public float gravity = -250f;
+    public float speed = 1200f;
     private int jumpCount = 0;
     public float rotateSpeed = 200f;
     public float jumpForce = 500f;
@@ -46,17 +45,26 @@ public class CharacterMove : MonoBehaviour
         float xInput = Input.GetAxis("Horizontal");
         float zInput = Input.GetAxis("Vertical");
 
-        float xSpeed = xInput * speed;
-        float zSpeed = zInput * speed;
+        float xSpeed = xInput * speed * Time.deltaTime;
+        float zSpeed = zInput * speed * Time.deltaTime;
 
         Vector3 newVelocity;
-        newVelocity = transform.right * xSpeed + transform.forward * zSpeed;
-
+        //앞 뒤 버튼을 동시에 눌러 대각선 이동을 한다면
+        if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
+        {
+            newVelocity = transform.right * xSpeed + transform.forward * zSpeed;
+            newVelocity *= 1.4142135f / 2; //2분의 루트2의 근사값을 곱해 속도 보정
+            newVelocity += transform.up * playerRigidbody.velocity.y;
+        }
+        else
+        {
+            newVelocity =
+                transform.right * xSpeed + transform.forward * zSpeed + transform.up * playerRigidbody.velocity.y;
+        }
         //transform.forward는 월드 좌표 기준 오브젝트의 회전 값을 반영한 normalized된 값을 반환합니다.
         //현재의 forward와 입력받은 값(방향)을 곱하여, 캐릭터를 기준(로컬 좌표)으로 캐릭터를 이동합니다.
-
-        //playerRigidbody.AddForce(Vector3.up * gravity);
-        playerRigidbody.velocity = newVelocity * Time.deltaTime;
+        
+        playerRigidbody.velocity = newVelocity;
         
     }
 

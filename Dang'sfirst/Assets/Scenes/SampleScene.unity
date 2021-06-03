@@ -794,8 +794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraRotate: {fileID: 963194228}
-  speed: 500
-  gravity: -250
+  speed: 1200
   rotateSpeed: 200
   jumpForce: 500
 --- !u!54 &2094817824
