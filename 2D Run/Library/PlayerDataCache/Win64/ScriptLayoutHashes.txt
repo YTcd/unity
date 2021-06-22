@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/lovem/Desktop/project/unity/2D Run/완료/Uni-Run.exe
+C:/Users/lovem/Desktop/ㅇㄽ/포트폴리오/Uni-Run.exe
 SceneListBegin?
 Assets/Main.unity
 SceneListEnd?
@@ -43,6 +43,8 @@ fc1d7083498a5b6a81f9be58a38848e1 UnityEngine.UI.dll:UnityEngine.UI.Toggle
 180d2afe8b0d57874ba15410535b1711 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 33ef70732084a118cf72fea4b1f9cee8 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 a5eedc0926fde218427d8988789064b5 Unity.TextMeshPro.dll:TMPro.TMP_InputField
+3e402a8de2e3e8efd4a4b53fe4a24c72 UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
+3e402a8de2e3e8efd4a4b53fe4a24c72 UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 8851f982c413df702f990c581526413e UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 3e402a8de2e3e8efd4a4b53fe4a24c72 UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 98c528cbdae5d69f28344025e7b6a68b UnityEngine.UI.dll:UnityEngine.UI.Button
