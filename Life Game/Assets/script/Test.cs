@@ -52,7 +52,7 @@ void Click()
             RaycastHit hit;
             int layerMask = 1 << LayerMask.NameToLayer("plane"); //클릭 위치 바닥만 인식하도록 레이어 추가
 
-            if (Physics.Raycast(ray, out hit,100f, layerMask))
+            if (Physics.Raycast(ray, out hit, 100f, layerMask) && hit.point.y <= 1.5)
             {
                 Debug.Log("클릭위치 "+ hit.point);
                 Vector3 hitPos = hit.point;
