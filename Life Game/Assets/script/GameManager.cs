@@ -12,8 +12,9 @@ public class GameManager : MonoBehaviour
 
     public Text time;
     public GameObject gameoverUI;
+    public Text turn;
 
-    private int score = 0;
+    private int Turn = 0;
 
 
     private void Awake()
@@ -32,15 +33,27 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        isGameover = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isGameover && Input.GetMouseButtonDown(0))
+        if (isGameover && Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("SampleScene");
         }
+
+        if (!isGameover && Turn == 0)
+        {
+            Turn++;
+            turn.text = Turn + " 번째 턴";
+        }
+
+    }
+
+    public void EndGame()
+    {
+
     }
 }
